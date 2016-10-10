@@ -18,6 +18,18 @@
 	<bean
 		class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
 	<!-- 视图解析器ViewResolver -->
+	<!-- 解析jsp，默认支持jstl -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+</b
+	
+	
+	
 	<!-- 配置程序员编写的handler -->
 	<bean name="/hello.action" class="" />
 
