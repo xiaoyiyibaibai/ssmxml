@@ -16,9 +16,9 @@
 		<!-- log4j日志文件管理包版本 -->
 		<slf4j.version>1.7.7</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
-		<maven.compiler.source>1.8</maven.compiler.source>  
-<maven.compiler.target>1.8</maven.compiler.target>  
-<maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>  
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
 	</properties>
 
 	<dependencies>
@@ -123,8 +123,8 @@
 			<artifactId>log4j</artifactId>
 			<version>${log4j.version}</version>
 		</dependency>
-		
-		
+
+
 		<!-- 格式化对象，方便输出日志 -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -167,8 +167,8 @@
 			<artifactId>commons-codec</artifactId>
 			<version>1.9</version>
 		</dependency>
-		
-		
+
+
 	</dependencies>
 	<build>
 		<finalName>org.zsl.hnust</finalName>
@@ -181,6 +181,6 @@
 					<target>${maven.compiler.source}</target>
 				</configuration>
 			</plugin>
-       </plugins>
+		</plugins>
 	</build>
 </project>
