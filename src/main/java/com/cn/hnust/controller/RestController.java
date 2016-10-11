@@ -42,6 +42,18 @@ public class RestController {
 	}
 	/**
 	 * 对应请求：http://localhost:8080/springmvc/rest/student/12
+	 * 
+	 * getPerson:function(){
+				$.ajax({
+					url: dekota.url + 'student/101/',
+					type: 'GET',
+					dataType: 'json'
+				}).done(function(data, status, xhr) {
+					$.UIkit.notify("获取人员信息成功", {status:'success',timeout:1000});
+				}).fail(function(xhr, status, error) {
+					$.UIkit.notify("请求失败！", {status:'danger',timeout:2000});
+				});
+			},
 	 * @param age
 	 * @return
 	 * 2016年10月11日 下午2:04:35
@@ -55,6 +67,22 @@ public class RestController {
 		st.setUsername("xdh");
 		return st;
 	}	
+	/**
+	 * delPerson:function(){
+				$.ajax({
+					url: dekota.url + 'student/109',
+					type: 'DELETE',
+					dataType: 'json'--返回值
+				}).done(function(data, status, xhr) {
+					$.UIkit.notify(data.msg, {status:'success',timeout:1000});
+				}).fail(function(xhr, status, error) {
+					$.UIkit.notify("请求失败！", {status:'danger',timeout:2000});
+				});
+			},
+	 * @param age
+	 * @return
+	 * 2016年10月11日 下午2:13:37
+	 */
 	@RequestMapping(value="/student/{age:\\d+}",method=RequestMethod.DELETE)
 	public @ResponseBody Object deleteStudent(@PathVariable("age") int age){
 		logger.debug("删除年龄为"+age+"的学生");
@@ -66,6 +94,24 @@ public class RestController {
 		json.put("msg", "删除用户成功！");
 		return st;
 	}	
+	/**
+	 * ajax中调用
+	 * addPerson:function(){
+				$.ajax({
+					url: dekota.url + 'student',
+					type: 'POST',
+					dataType: 'json',--返回值类型
+					data: {age: 1,username:'张三',address:'sw',}
+				}).done(function(data, status, xhr) {
+					$.UIkit.notify(data.msg, {status:'success',timeout:1000});
+				}).fail(function(xhr, status, error) {
+					$.UIkit.notify("请求失败！", {status:'danger',timeout:2000});
+				});
+			},
+	 * @param person
+	 * @return
+	 * 2016年10月11日 下午2:11:43
+	 */
 	@RequestMapping(value = "/student", method = RequestMethod.POST)
 	public @ResponseBody
 	Object addStudent(Student person) {
@@ -75,6 +121,23 @@ public class RestController {
 		stList.add(person);
 		return jsonObject;
 	}
+	/**
+	 * updatePerson:function(){
+				$.ajax({
+					url: dekota.url + 'student',
+					type: 'POST',//注意在传参数时，加：_method:'PUT'　将对应后台的PUT请求方法
+					dataType: 'json',
+					data: {_method:'PUT',age: 1,username:'张三',address:'sw',}
+				}).done(function(data, status, xhr) {
+					$.UIkit.notify(data.msg, {status:'success',timeout:1000});
+				}).fail(function(xhr, status, error) {
+					$.UIkit.notify("请求失败！", {status:'danger',timeout:2000});
+				});
+			},
+	 * @param person
+	 * @return
+	 * 2016年10月11日 下午2:14:40
+	 */
 	@RequestMapping(value = "/student", method = RequestMethod.PUT)
 	public @ResponseBody
 	Object updatePerson(Student person) {
@@ -87,11 +150,24 @@ public class RestController {
 /**
  * get类型的可以在url中直接访问。
  * http://localhost:8080/springmvc/rest/student?name=1222
+ * 
+ * listPerson:function(){
+				$.ajax({
+					url: dekota.url + 'student',
+					type: 'POST',//注意在传参数时，加：_method:'PATCH'　将对应后台的PATCH请求方法
+					dataType: 'json',
+					data: {_method:'PATCH',name: '张三'}
+				}).done(function(data, status, xhr) {
+					$.UIkit.notify("查询人员信息成功", {status:'success',timeout:1000});
+				}).fail(function(xhr, status, error) {
+					$.UIkit.notify("请求失败！", {status:'danger',timeout:2000});
+				});
+			}
  * @param name
  * @return
  * 2016年10月11日 下午2:09:26
  */
-	@RequestMapping(value = "/student", method = RequestMethod.GET)
+	@RequestMapping(value = "/student", method = RequestMethod.PATCH)
 	public @ResponseBody
 	List<Student> listPerson(@RequestParam(value = "name", required = false, defaultValue = "") String name) {
 
