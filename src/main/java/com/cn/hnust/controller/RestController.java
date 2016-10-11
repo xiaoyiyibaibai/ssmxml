@@ -3,8 +3,10 @@ package com.cn.hnust.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.annotation.WebServlet;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONObject;
 import com.cn.hnust.pojo.Student;
 
+
+
 /**
  * 基于Restful风格架构
  * @author xiaodonghong
@@ -24,7 +28,7 @@ import com.cn.hnust.pojo.Student;
 @RequestMapping(value="/rest")
 public class RestController {
 	/** 日志实例 */
-	private static final Logger logger = Logger.getLogger(RestController.class);
+	private static final Logger logger = LoggerFactory.getLogger(RestController.class);
 	private static List<Student> stList = new ArrayList<Student>();
 	@RequestMapping(value="/hello")
 	public String hello(){
@@ -38,6 +42,7 @@ public class RestController {
 	 */
 	@RequestMapping(value="/say/{msg}",produces="application/json;charset=UTF-8")
 	public @ResponseBody String say(String msg){
+		logger.debug("浏览");
 		return "{\"msg\":\"you say:'" + msg + "'\"}";
 	}
 	/**
