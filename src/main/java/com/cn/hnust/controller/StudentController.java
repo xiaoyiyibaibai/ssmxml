@@ -19,6 +19,7 @@ public class StudentController {
 	//学生查询
 	@RequestMapping("queryStudent")
 	public String queryStudent(Model model,String type) {
+		
 		System.out.println("学生类型="+type);
 		//将学生信息显示到页面上
 		List<Student> list  = new ArrayList<Student>();
