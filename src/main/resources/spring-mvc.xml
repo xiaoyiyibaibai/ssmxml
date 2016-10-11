@@ -9,10 +9,12 @@
                         http://www.springframework.org/schema/context/spring-context-3.1.xsd  
                         http://www.springframework.org/schema/mvc  
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
-	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
-	<context:component-scan base-package="com.cn.hnust.controller" />
+	<!-- 注解驱动 -->
 	<mvc:annotation-driven
 		content-negotiation-manager="contentNegotiationManagerFactoryBean" />
+	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
+	<context:component-scan base-package="com.cn.hnust.controller" />
+	<!-- 对静态资源文件的访问 不支持访问WEB-INF目录 -->
 	<mvc:default-servlet-handler />
 	<bean
 		class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean"
@@ -28,6 +30,14 @@
 			</map>
 		</property>
 	</bean>
+	<bean id="stringConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/plain;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+	<!-- 输出对象转JSON支持 -->
 	<bean
 		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"
 		id="mappingJacksonHttpMessageConverter">
@@ -42,12 +52,16 @@
 		<property name="messageConverters">
 			<list>
 				<ref bean="mappingJacksonHttpMessageConverter" />
+				<ref bean="stringConverter" />
 			</list>
 		</property>
 	</bean>
-
+	<!-- 视图解析 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 返回的视图模型数据需要经过jstl来处理 -->
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
 		<property name="prefix" value="/WEB-INF/jsp/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
