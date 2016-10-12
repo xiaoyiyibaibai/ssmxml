@@ -22,12 +22,12 @@ import org.springframework.web.servlet.DispatcherServlet;
  *
  * 2016年10月11日 下午8:24:00
  */
-public class OnStartupConfig implements WebApplicationInitializer  {
+public class OnStartupConfig /*implements WebApplicationInitializer*/  {
 	private static final String SERVLET_NAME = "Spring-mvc";
 	private static final long MAX_FILE_UPLOAD_SIZE = 1024 * 1024 * 5; // 5 Mb
 	private static final int FILE_SIZE_THRESHOLD = 1024 * 1024; // After 1Mb
 	private static final long MAX_REQUEST_SIZE = -1L; // No request size limit
-	@Override
+	//@Override
 	public void onStartup(ServletContext container) throws ServletException {
 		initializeSpringConfig(container);
 
