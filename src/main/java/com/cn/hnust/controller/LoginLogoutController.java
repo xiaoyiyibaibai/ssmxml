@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
    * 2016年10月12日 上午10:53:50
    */
 @Controller  
-@RequestMapping("auth")  
+@RequestMapping(value= "/auth")  
 public class LoginLogoutController {  
     protected static Logger logger = LoggerFactory.getLogger(LoginLogoutController.class);  
   
