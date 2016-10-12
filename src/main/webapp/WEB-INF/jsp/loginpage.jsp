@@ -8,7 +8,7 @@
 <html>  
 <head>  
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
-<title>Insert title here</title>  
+<title>登录页面</title>  
 </head>  
 <% 
     String path = request.getContextPath();
@@ -16,7 +16,7 @@
  %>
 <body>  
   
-    <h1>Login</h1>  
+    <h1>登录页面，输入登录信息。</h1>  
   
     <div id="login-error">${error}</div>  
   
