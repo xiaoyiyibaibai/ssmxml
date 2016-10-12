@@ -3,6 +3,7 @@ package com.cn.hnust.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.annotation.WebServlet;
 
 import org.slf4j.Logger;
@@ -15,7 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
-import com.cn.hnust.pojo.Student;
+import com.cn.hnust.pojo.User;
+import com.cn.hnust.service.IUserService;
 
 
 
@@ -27,9 +29,11 @@ import com.cn.hnust.pojo.Student;
 @Controller
 @RequestMapping(value="/rest")
 public class RestController {
+	@Resource
+	private IUserService userService;
 	/** 日志实例 */
 	private static final Logger logger = LoggerFactory.getLogger(RestController.class);
-	private static List<Student> stList = new ArrayList<Student>();
+	private static List<User> stList = new ArrayList<User>();
 	@RequestMapping(value="/hello")
 	public String hello(){
 		return "你好！hello";
@@ -46,7 +50,7 @@ public class RestController {
 		return "{\"msg\":\"you say:'" + msg + "'\"}";
 	}
 	/**
-	 * 对应请求：http://localhost:8080/springmvc/rest/student/12
+	 * 对应请求：http://localhost:8080/springmvc/rest/user/12
 	 * 
 	 * getPerson:function(){
 				$.ajax({
@@ -63,13 +67,10 @@ public class RestController {
 	 * @return
 	 * 2016年10月11日 下午2:04:35
 	 */
-	@RequestMapping(value="/student/{age:\\d+}",method=RequestMethod.GET)
-	public @ResponseBody Student getStudent(@PathVariable("age") int age){
-		logger.debug("获取学生的年龄="+age);
-		Student st = new Student();
-		st.setAddress("sd");
-		st.setAge(21);
-		st.setUsername("xdh");
+	@RequestMapping(value="/user/{age:\\d+}",method=RequestMethod.GET)
+	public @ResponseBody User getUser(@PathVariable("age") int id){
+		logger.debug("获取学生的年龄="+id);
+		User st = userService.getUserById(id);
 		return st;
 	}	
 	/**
@@ -88,16 +89,15 @@ public class RestController {
 	 * @return
 	 * 2016年10月11日 下午2:13:37
 	 */
-	@RequestMapping(value="/student/{age:\\d+}",method=RequestMethod.DELETE)
-	public @ResponseBody Object deleteStudent(@PathVariable("age") int age){
-		logger.debug("删除年龄为"+age+"的学生");
-		Student st = new Student();
-		st.setAddress("sd");
-		st.setAge(21);
-		st.setUsername("xdh");
+	@RequestMapping(value="/user/{age:\\d+}",method=RequestMethod.DELETE)
+	public @ResponseBody Object deleteUser(@PathVariable("id") int id){
+		logger.debug("删除id为"+id+"的用户");
+		User user = userService.getUserById(id);
+		userService.deleteUser(id);
 		JSONObject json = new JSONObject();
 		json.put("msg", "删除用户成功！");
-		return st;
+		json.put("user", user);
+		return json;
 	}	
 	/**
 	 * ajax中调用
@@ -117,13 +117,13 @@ public class RestController {
 	 * @return
 	 * 2016年10月11日 下午2:11:43
 	 */
-	@RequestMapping(value = "/student", method = RequestMethod.POST)
+	@RequestMapping(value = "/user", method = RequestMethod.POST)
 	public @ResponseBody
-	Object addStudent(Student person) {
+	Object addUser(User person) {
 		logger.info("注册人员信息成功id=" );
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("msg", "注册人员信息成功");
-		stList.add(person);
+		userService.addUser(person);
 		return jsonObject;
 	}
 	/**
@@ -143,18 +143,18 @@ public class RestController {
 	 * @return
 	 * 2016年10月11日 下午2:14:40
 	 */
-	@RequestMapping(value = "/student", method = RequestMethod.PUT)
+	@RequestMapping(value = "/user", method = RequestMethod.PUT)
 	public @ResponseBody
-	Object updatePerson(Student person) {
+	Object updatePerson(User person) {
 		logger.info("更新人员信息id=" );
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("msg", "更新人员信息成功");
-		stList.add(person);
+		userService.updateUser(person);
 		return jsonObject;
 	}
 /**
  * get类型的可以在url中直接访问。
- * http://localhost:8080/springmvc/rest/student?name=1222
+ * http://localhost:8080/springmvc/rest/user?name=233
  * 
  * listPerson:function(){
 				$.ajax({
@@ -172,30 +172,12 @@ public class RestController {
  * @return
  * 2016年10月11日 下午2:09:26
  */
-	@RequestMapping(value = "/student", method = RequestMethod.PATCH)
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public @ResponseBody
-	List<Student> listPerson(@RequestParam(value = "name", required = false, defaultValue = "") String name) {
+	List<User> listPerson(@RequestParam(value = "name", required = false, defaultValue = "") String name) {
 
 		logger.info("查询人员name like " + name);
-		List<Student> lstPersons = new ArrayList<Student>();
-
-		Student st = new Student();
-		st.setAddress("sd");
-		st.setAge(21);
-		st.setUsername("xdh");
-		lstPersons.add(st);
-		
-		Student st2 = new Student();
-		st2.setAddress("sd2");
-		st2.setAge(212);
-		st2.setUsername("xdh2");
-		lstPersons.add(st2);
-		
-		Student st23 = new Student();
-		st23.setAddress("sd23");
-		st23.setAge(2123);
-		st23.setUsername("xdh23");
-		lstPersons.add(st23);
+		List<User> lstPersons = this.userService.findAllUser();
 
 		return lstPersons;
 	}

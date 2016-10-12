@@ -1,5 +1,7 @@
 package com.cn.hnust.dao;
 
+import java.util.List;
+
 import com.cn.hnust.pojo.User;
 
 public interface IUserDao {
@@ -14,4 +16,5 @@ public interface IUserDao {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+    List<User> selectAllUser();
 }

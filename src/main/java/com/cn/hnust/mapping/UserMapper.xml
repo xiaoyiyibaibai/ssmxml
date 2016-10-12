@@ -10,6 +10,11 @@
   <sql id="Base_Column_List" >
     id, user_name, password, age
   </sql>
+  <select id="selectAllUser" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_t
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
