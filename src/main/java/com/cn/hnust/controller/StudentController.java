@@ -5,12 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cn.hnust.pojo.Student;
+import com.cn.hnust.service.IStudentService;
 /**
  * 学生信息管理
  * @author Administrator
@@ -19,13 +22,15 @@ import com.cn.hnust.pojo.Student;
 @Controller
 @RequestMapping("/student")
 public class StudentController {
+	@Autowired
+	@Qualifier(value="studentServiceImpl")
+	IStudentService studentService;
 	//学生查询
 	@RequestMapping("queryStudent")
 	public String queryStudent(Model model,String type) {
 
 		System.out.println("学生类型="+type);
 		//将学生信息显示到页面上
-		List<Student> list  = new ArrayList<Student>();
 		//模拟静态数据
 		Student st1 = new Student();
 		st1.setUsername("肖东红");
@@ -39,9 +44,9 @@ public class StudentController {
 		st3.setUsername("liminghao");
 		st3.setAge(18);
 		st3.setAddress("sd");
-		list.add(st1);
-		list.add(st2);
-		list.add(st3);
+		studentService.addStudentById(st1);
+		studentService.addStudentById(st2);
+		List<Student> list = studentService.addStudentById(st3);
 		model.addAttribute("studentList", list);
 		return "queryStudent";
 	}
@@ -57,8 +62,7 @@ rows：List<Student>
 	 */
 	@RequestMapping("queryStudentJson")
 	public @ResponseBody Map<String,Object> queryStudentJson(Model model){
-		//将学生信息显示到页面上
-		List<Student> list  = new ArrayList<Student>();
+
 		//模拟静态数据
 		Student st1 = new Student();
 		st1.setUsername("肖东红");
@@ -72,9 +76,10 @@ rows：List<Student>
 		st3.setUsername("liminghao");
 		st3.setAge(18);
 		st3.setAddress("sd");
-		list.add(st1);
-		list.add(st2);
-		list.add(st3);
+		studentService.addStudentById(st1);
+		studentService.addStudentById(st2);
+		//将学生信息显示到页面上
+		List<Student> list = studentService.addStudentById(st3);
 		model.addAttribute("studentList", list);
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("total", list.size());
