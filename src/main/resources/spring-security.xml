@@ -13,25 +13,28 @@
 	<!-- Spring-Security 的配置 -->
 	<!-- 注意开启use-expressions.表示开启表达式. see:http://www.family168.com/tutorial/springsecurity3/html/el-access.html -->
 	<!-- 只有用户“xiao”才能允许访问URL：/main/admin -->
-	<!-- 角色用户可登陆页面 
-	
-	/main/common:所有人可以访问。
-	/main/admin：系统管理员
-	-->
+	<!-- 角色用户可登陆页面 /main/common:所有人可以访问。 /main/admin：系统管理员 -->
 	<security:http auto-config="true">
-		<security:intercept-url pattern="/auth/login"
-			access="hasRole('ROLE_USER')" /> 
 		<security:intercept-url pattern="/main/admin"
 			access="hasRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/main/common"
 			access="permitAll" />
+		<security:intercept-url pattern="/auth/login"
+			access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/auth/login"
+			access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/rest/say"
+			access="hasRole('ROLE_USER')" />
+			<!-- 如果还有地层路径，也需要写出来。 -->
+		<security:intercept-url pattern="/rest/user/*"
+			access="hasRole('ROLE_ADMIN')" />
 	</security:http>
 	<security:authentication-manager>
-	 <security:authentication-provider>
-	  <!-- 1.基础用户  -->
-	   <security:user-service>
-	     <security:user name="xiao"  password="abc" authorities="ROLE_ADMIN"/>
-	   </security:user-service>
-	 </security:authentication-provider>
+		<security:authentication-provider>
+			<!-- 1.基础用户 -->
+			<security:user-service>
+				<security:user name="xiao" password="abc" authorities="ROLE_USER" />
+			</security:user-service>
+		</security:authentication-provider>
 	</security:authentication-manager>
 </beans>  
