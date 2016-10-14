@@ -35,7 +35,7 @@ public class RestController {
 	private static final Logger logger = LoggerFactory.getLogger(RestController.class);
 	private static List<User> stList = new ArrayList<User>();
 	@RequestMapping(value="/hello")
-	public String hello(){
+	public @ResponseBody String hello(){
 		return "你好！hello";
 	}
 	/**
