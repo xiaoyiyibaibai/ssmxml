@@ -20,9 +20,7 @@
 		<security:intercept-url pattern="/main/common"
 			access="permitAll" />
 		<security:intercept-url pattern="/auth/login"
-			access="hasRole('ROLE_USER')" />
-		<security:intercept-url pattern="/auth/login"
-			access="hasRole('ROLE_USER')" />
+			access="hasRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/rest/say"
 			access="hasRole('ROLE_USER')" />
 			<!-- 如果还有地层路径，也需要写出来。 -->
