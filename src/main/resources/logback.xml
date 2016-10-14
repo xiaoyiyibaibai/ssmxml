@@ -28,6 +28,9 @@
   <logger name="com.cn.hnust.pojo" level="error"/>
   <logger name="jdbc.connection" level="OFF"/>
   <logger name="com.cn.hnust.dao" level="error"/>
+  <logger name="com.cn.hnust.service.impl" level="debug">
+    <appender-ref ref="DC"/>
+  </logger>
   <logger name="com.cn.hnust.controller" level="debug">
     <appender-ref ref="DC"/>
   </logger>

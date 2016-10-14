@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html class="no-js">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<meta http-equiv="Cache-Control" content="no-siteapp">
+		<title>Spring AOP+AspectJ在XML配置实例 - Spring教程</title>
+		<meta name="keywords" content="Spring,AOP,AspectJ,XML配置,实例" />
+		<meta name="description" content="在本教程中，我们将向你展示如何转换上章节中 SpringAOP+AspectJ 注解 转成基于XML的配置。 对于那些不喜欢注释，使用JDK1.4，则可以基于XML，而不使用 AspectJ。 再次回顾上个 customerBo 接口" />
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" href="/static.v2.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static.v2.0/css/icomoon-social.css">
+		<link rel="stylesheet" href="/static.v2.0/css/leaflet.css" />
+		<!--[if lte IE 8]>
+		<link rel="stylesheet" href="/static.v2.0/css/leaflet.ie.css" />
+		<![endif]-->
+		<link rel="stylesheet" href="/static.v2.0/css/main.css">
+		<script src="/static.v2.0/js/modernizr-respond.min.js"></script>
+		<!--[if lt IE 9]>
+<p class="chromeframe">您在使用这样<strong>旧版本</strong>的浏览器让我们实在感到很为难. 请到<a href="http://browsehappy.com/">更新的浏览器版本(IE8以上).</a> 我们强烈建议使用<a href="http://www.google.com/chromeframe/?redirect=true">Google Chrome</a>来获得较高的浏览体验。</p>
+<![endif]-->
+<!-- Navigation & Logo-->
+	</head>
+	<body>
+		<!-- acticle-art.html -->
+		<!-- Navigation & Logo-->
+		<!--[if lt IE 7]>
+<p class="chromeframe">您在使用这样<strong>旧版本</strong>的浏览器让我们实在感到很为难. 请到<a href="http://browsehappy.com/">更新的浏览器版本(IE8以上).</a> 我们强烈建议使用<a href="http://www.google.com/chromeframe/?redirect=true">Google Chrome</a>来获得较高的浏览体验。</p>
+<![endif]-->
+<!-- Navigation & Logo-->
+<div class="mainmenu-wrapper">
+	<div class="container">
+		<div id="mainmenu" class="mainmenu">
+			<ul>
+				<li class="logo-wrapper">
+					<a href="http://www.yiibai.com"><img src="/static.v2.0/img/logo.png" alt="易百教程"></a>
+				</li>
+				<li class="has-submenu">
+					<a href="#">+全部</a>
+					<div class="mainmenu-submenu">
+						<style>
+	.mainmenu .mainmenu-submenu-inner > div{
+		width:20%;
+	}
+</style>
+<div class="mainmenu-submenu-inner" style="margin: auto; padding-left: 24px;">
+	<div>
+		<h4>Java技术</h4>
+		<ul>
+			
+			<li>
+				<a href="http://www.yiibai.com/junit/">JUnit教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/log4j/">Log4j教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/html/ejb/">EJB</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/json/">Json教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/testng/">TestNG教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/java/">Java教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/html/awt/">AWT</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/jmeter/">JMeter教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/swing/">Swing</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/java/util/">Java.util包</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/struts_2/">Struts2教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/maven/">Maven教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/java/io/">Java.io包</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/javamail_api/">JavaMail</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/spring/">Spring教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/jsp/">JSP教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/ant/">ANT</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/ibatis/">ibatis</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/hibernate/">hibernate</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/jdbc/">JDBC教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/jasper_reports/">JasperReports教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/javaexamples/">java实例教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/java/math/">Java.math包</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/mybatis/">MyBatis教程</a>
+			</li>
+			
+		</ul>
+		<h4>高级语言</h4>
+		<ul>
+			
+			<li>
+				<a href="http://www.yiibai.com/rust/">Rust教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/html/assembly/">Assembly汇编</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/c_standard_library/">C语言标准库</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/matlab/">Matlab教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/euphoria/">Euphoria教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/objective_c/">Objective-C教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/d_programming/">D语言教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/lisp/">Lisp教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/swift/">Swift教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/cobol/">COBOL教程</a>
+			</li>
+			
+		</ul>
+	</div>
+	<div>
+		<h4>Web技术</h4>
+		<ul>
+			
+			<li>
+				<a href="http://www.yiibai.com/webgl/">WebGL教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/ruby-on-rails/">Ruby On Rails</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/flex/">Flex</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/gwt/">GWT</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/jsf/">JSF</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/asp.net/">ASP.NET</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/html/">HTML</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/html5/">HTML5</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/xhtml/">XHTML</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/css/">CSS</a>
+			</li>
+			
+		</ul>
+		<h4>高级语言</h4>
+		<ul>
+			
+			<li>
+				<a href="http://www.yiibai.com/rust/">Rust教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/html/assembly/">Assembly汇编</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/c_standard_library/">C语言标准库</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/matlab/">Matlab教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/euphoria/">Euphoria教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/objective_c/">Objective-C教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/d_programming/">D语言教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/lisp/">Lisp教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/swift/">Swift教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/cobol/">COBOL教程</a>
+			</li>
+			
+		</ul>
+	</div>
+	<div>
+		<h4>脚本语言</h4>
+		<ul>
+			
+			<li>
+				<a href="http://www.yiibai.com/wxpython/">WxPython教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/ruby/">Ruby教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/php/">PHP教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/python/">Python教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/lua/">Lua教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/tcl/">Tcl教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/tk/">Tk教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/python3/">Python3教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/php7/">PHP7教程</a>
+			</li>
+			
+		</ul>
+		<h4>其它技术</h4>
+		<ul>
+			
+			<li>
+				<a href="http://www.yiibai.com/excel/">Excel教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/html/uml/">UML</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/html/socket/">Socket编程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/html/radius/">Radius教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/nodejs/">Node.js教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/svn/">SVN教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/git/">Git教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/makefile/">Makefile</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/unix/">Unix</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/unix_commands/">Linux/Unix命令</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/unix_system_calls/">Unix/Linux系统调用</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/shell/">Shell</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/drools/">Drools教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/linq/">LinQ教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/wcf/">WCF教程</a>
+			</li>
+			
+		</ul>
+	</div>
+	<div>
+		<h4>数据库</h4>
+		<ul>
+			
+			<li>
+				<a href="http://www.yiibai.com/mysql/">MySQL教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/plsql/">PL/SQL教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/postgresql/">PostgreSQL教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/mongodb/">MongoDB教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/sqlite/">SQLite教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/db2/">DB2教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/redis/">Redis教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/memcached/">Memcached教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/access/">Access教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/sql/">SQL教程</a>
+			</li>
+			
+			<li>
+				<a href="http://www.yiibai.com/sql_server/">SQL Server教程</a>
+			</li>
+			
+		</ul>
+		<h4>通信技术</h4>
+		<ul>
+			
+		</ul>
+	</div><!-- /mainmenu-submenu-inner -->
+</div><!-- /mainmenu-submenu -->
+					</div>
+				</li>
+				<li>
+					<a href="http://www.yiibai.com/java/">Java</a>
+				</li>
+				<li>
+					<a href="http://www.yiibai.com/python/">Python</a>
+				</li>
+				
+				<li>
+					<a href="http://www.yiibai.com/mysql/">MySQL</a>
+				</li>
+				<li>
+					<a href="http://www.yiibai.com/articles" style="color: #4f8db3;">最新文章</a>
+				</li>
+				<li>
+					<a href="http://www.yiibai.com/login/byqq" style="color: #4f8db3;"><img src="/static.v2.0/images/QQ_blue_76X24.png"></a>
+				</li>
+
+			</ul>
+			<!--
+			<form>
+				<div class="input-group">
+					<input class="form-control input-md" id="appendedInputButtons" type="text" value="" data-empty="Search our Blog">
+					<span class="input-group-btn">
+						<button class="btn btn-md" type="button">搜索</button> </span>
+				</div>
+			</form>
+			-->
+		</div>
+	</div>
+</div>
+		<!-- Page Title -->
+		<div class="section section-breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12" style="font-size: 12pt;">
+						位置：<a href='http://www.yiibai.com/'>首页</a> > <a href='/html/java/'>Java技术</a> > <a href='/spring/'>Spring教程</a> >  Spring AOP+AspectJ在XML配置实例
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="section">
+			<div class="container">
+				<div class="row">
+					<!-- Sidebar -->
+					<div class="col-sm-3 blog-sidebar" style="float:left;width: 22%;">						
+						<div id="w2" class="list-group">
+							<a class="list-group-item" href="#" style="font-size: 12.5pt;font-weight:bold;background-color: #f5f5f5;">Spring教程</a>
+							<a class="list-group-item" href="/spring/spring-3-hello-world-example.html" title="Spring hello world实例">Spring hello world实例</a><a class="list-group-item" href="/spring/spring-loosely-coupled-example.html" title="Spring松耦合实例">Spring松耦合实例</a><a class="list-group-item" href="/spring/spring-3-javaconfig-example.html" title="Spring JavaConfig实例">Spring JavaConfig实例</a><a class="list-group-item" href="/spring/spring-3-javaconfig-import-example.html" title="Spring JavaConfig @Import实例">Spring JavaConfig @Import实例</a><a class="list-group-item" href="/spring/spring-dependency-injection-di.html" title="Spring依赖注入（DI）">Spring依赖注入（DI）</a><a class="list-group-item" href="/spring/spring-di-via-setter-method.html" title="Spring使用Setter依赖注入">Spring使用Setter依赖注入</a><a class="list-group-item" href="/spring/spring-di-via-constructor.html" title="Spring通过构造方法依赖注入">Spring通过构造方法依赖注入</a><a class="list-group-item" href="/spring/spring-bean-reference-example.html" title="Spring Bean引用例子">Spring Bean引用例子</a><a class="list-group-item" href="/spring/how-to-define-bean-properties-in-spring.html" title="如何注入值到Spring bean属性">如何注入值到Spring bean属性</a><a class="list-group-item" href="/spring/load-multiple-spring-bean-configuration-file.html" title="Spring bean加载多个配置文件">Spring bean加载多个配置文件</a><a class="list-group-item" href="/spring/spring-inner-bean-examples.html" title="Spring内部bean实例">Spring内部bean实例</a><a class="list-group-item" href="/spring/spring-bean-scopes-examples.html" title="Spring Bean作用域实例">Spring Bean作用域实例</a><a class="list-group-item" href="/spring/spring-collections-list-set-map-and-properties-example.html" title="Spring集合 (List,Set,Map,Properties) 实例">Spring集合 (List,Set,Map,Properties) 实例</a><a class="list-group-item" href="/spring/spring-listfactorybean-example.html" title="Spring ListFactoryBean实例">Spring ListFactoryBean实例</a><a class="list-group-item" href="/spring/spring-setfactorybean-example.html" title="Spring SetFactoryBean实例">Spring SetFactoryBean实例</a><a class="list-group-item" href="/spring/spring-mapfactorybean-example.html" title="Spring MapFactoryBean例子">Spring MapFactoryBean例子</a><a class="list-group-item" href="/spring/spring-how-to-pass-a-date-into-bean-property-customdateeditor.html" title="Spring注入日期到bean属性-CustomDateEditor">Spring注入日期到bean属性-CustomDateEditor</a><a class="list-group-item" href="/spring/spring-propertyplaceholderconfigurer-example.html" title="Spring PropertyPlaceholderConfigurer实例">Spring PropertyPlaceholderConfigurer实例</a><a class="list-group-item" href="/spring/spring-bean-configuration-inheritance.html" title="Spring bean配置继承">Spring bean配置继承</a><a class="list-group-item" href="/spring/spring-properties-dependency-checking.html" title="Spring依赖检查">Spring依赖检查</a><a class="list-group-item" href="/spring/spring-dependency-checking-with-required-annotation.html" title="Spring使用@Required注解依赖检查">Spring使用@Required注解依赖检查</a><a class="list-group-item" href="/spring/spring-define-custom-required-style-annotation.html" title="Spring自定义@Required-style注解">Spring自定义@Required-style注解</a><a class="list-group-item" href="/spring/spring-initializingbean-and-disposablebean-example.html" title="Spring Bean InitializingBean和DisposableBean实例">Spring Bean InitializingBean和DisposableBean实例</a><a class="list-group-item" href="/spring/spring-init-method-and-destroy-method-example.html" title="Spring Bean init-method 和 destroy-method实例">Spring Bean init-method 和 destroy-method实例</a><a class="list-group-item" href="/spring/spring-postconstruct-and-predestroy-example.html" title="Spring @PostConstruct和@PreDestroy实例">Spring @PostConstruct和@PreDestroy实例</a><a class="list-group-item" href="/spring/spring-el-hello-world-example.html" title="Spring EL hello world实例">Spring EL hello world实例</a><a class="list-group-item" href="/spring/spring-el-bean-reference-example.html" title="Spring EL bean引用实例">Spring EL bean引用实例</a><a class="list-group-item" href="/spring/spring-el-method-invocation-example.html" title="Spring EL方法调用实例">Spring EL方法调用实例</a><a class="list-group-item" href="/spring/spring-el-operators-example.html" title="Spring EL运算符实例">Spring EL运算符实例</a><a class="list-group-item" href="/spring/spring-el-ternary-operator-if-then-else-example.html" title="Spring EL三元运算(if-then-else)实例">Spring EL三元运算(if-then-else)实例</a><a class="list-group-item" href="/spring/spring-el-lists-maps-example.html" title="Spring EL Lists,Maps实例">Spring EL Lists,Maps实例</a><a class="list-group-item" href="/spring/spring-el-regular-expression-example.html" title="Spring EL正则表达式实例">Spring EL正则表达式实例</a><a class="list-group-item" href="/spring/spring-auto-scanning-components.html" title="Spring自动扫描组件">Spring自动扫描组件</a><a class="list-group-item" href="/spring/spring-filtering-components-in-auto-scanning.html" title="Spring过滤器组件自动扫描">Spring过滤器组件自动扫描</a><a class="list-group-item" href="/spring/spring-auto-wiring-beans-in-xml.html" title="Spring自动装配Beans">Spring自动装配Beans</a><a class="list-group-item" href="/spring/spring-aop-examples-advice.html" title="Spring AOP通知实例 – Advice">Spring AOP通知实例 – Advice</a><a class="list-group-item" href="/spring/spring-aop-example-pointcut-advisor.html" title="Spring AOP实例(Pointcut,Advisor)">Spring AOP实例(Pointcut,Advisor)</a><a class="list-group-item" href="/spring/spring-auto-proxy-creator-example.html" title="Spring自动代理创建者实例">Spring自动代理创建者实例</a><a class="list-group-item" href="/spring/spring-aop-aspectj-annotation-example.html" title="Spring AOP+AspectJ注解实例">Spring AOP+AspectJ注解实例</a><a class="list-group-item" href="/spring/spring-objectxml-mapping-example.html" title="Spring Object到XML映射实例">Spring Object到XML映射实例</a><a class="list-group-item" href="/spring/maven-spring-jdbc-example.html" title="Spring+JDBC实例">Spring+JDBC实例</a><a class="list-group-item" href="/spring/spring-jdbctemplate-jdbcdaosupport-examples.html" title="Spring JdbcTemplate+JdbcDaoSupport实例">Spring JdbcTemplate+JdbcDaoSupport实例</a><a class="list-group-item" href="/spring/spring-jdbctemplate-querying-examples.html" title="Spring JdbcTemplate查询实例">Spring JdbcTemplate查询实例</a><a class="list-group-item" href="/spring/spring-simplejdbctemplate-querying-examples.html" title="Spring SimpleJdbcTemplate查询示例">Spring SimpleJdbcTemplate查询示例</a><a class="list-group-item" href="/spring/spring-named-parameters-examples-in-simplejdbctemplate.html" title="Spring SimpleJdbcTemplate类命名参数实例">Spring SimpleJdbcTemplate类命名参数实例</a><a class="list-group-item" href="/spring/maven-spring-hibernate-mysql-example.html" title="Spring+Hibernate+MySql实例">Spring+Hibernate+MySql实例</a><a class="list-group-item" href="/spring/spring-aop-transaction-management-in-hibernate.html" title="Spring AOP在Hibernate事务管理">Spring AOP在Hibernate事务管理</a><a class="list-group-item" href="/spring/spring-define-an-e-mail-template-in-bean-configuration-file.html" title="Spring在bean配置文件中定义电子邮件模板">Spring在bean配置文件中定义电子邮件模板</a><a class="list-group-item" href="/spring/spring-sending-e-mail-with-attachment.html" title="Spring发送带附件邮件">Spring发送带附件邮件</a><a class="list-group-item" href="/spring/spring-how-to-do-dependency-injection-in-your-session-listener.html" title="Spring依赖注入servlet会话监听器">Spring依赖注入servlet会话监听器</a><a class="list-group-item" href="/spring/struts-spring-integration-example.html" title="Spring资源捆绑ResourceBundleMessageSource示例">Spring资源捆绑ResourceBundleMessageSource示例</a><a class="list-group-item" href="/spring/spring-tutorial-for-beginners.html" title="Spring初学快速入门">Spring初学快速入门</a><a class="list-group-item" href="/spring/spring_jdbc.html" title="Spring+JDBC实例">Spring+JDBC实例</a>
+						</div>
+						
+					</div>
+					<!-- End Sidebar -->
+					<div class="col-sm-9" style="float:left;padding:0px;">
+						<div class="blog-post blog-single-post" style="float:left;">
+							<div class="single-post-title" style="margin-bottom: 12px;">
+								<h1 style="font-size: 20pt;text-align:center;">Spring AOP+AspectJ在XML配置实例</h1>
+							</div>
+							<div class="single-post-info" style="margin-top: 24px;">
+								<i class="glyphicon glyphicon-time"></i>
+								<span>由 <b>谭明智</b> &nbsp; &nbsp; 翻译整理 &nbsp; </span>
+								<span style="color:"> Windows10用户联盟QQ群：<b>227270512</b></span>
+								<span style="float:right;">
+								<!-- JiaThis Button BEGIN -->
+								<div class="jiathis_style_24x24" style="padding-left:2px;">
+									<a class="jiathis_button_qzone"></a>
+									<a class="jiathis_button_tsina"></a>
+									<a class="jiathis_button_tqq"></a>
+									<a class="jiathis_button_weixin"></a>
+									<a class="jiathis_button_renren"></a>
+									<a href="http://www.jiathis.com/share?uid=1996613" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+									<a class="jiathis_counter_style"></a>
+								</div>
+								<script type="text/javascript">
+								var jiathis_config = {data_track_clickback:'true'};
+								</script>
+								<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1996613" charset="utf-8"></script>
+								<!-- JiaThis Button END -->
+								</span>
+							</div>							
+
+							<div class="row" style="float:left;width:100%;">
+								<div class="content-body" style="">
+									
+									<div style="float:left;">
+										<script type="text/javascript">
+											<!--
+											google_ad_client ="ca-pub-1090193214637198";
+											google_ad_slot = "9805510053";
+											google_ad_width = 728;
+											google_ad_height = 90;
+											//-->
+										</script>
+										<script type="text/javascript"
+										src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+									</div>
+									<div id="baidu-ad" style="padding-top: 6px;padding-bottom: 6px;float:left;">
+										<script type="text/javascript">
+											/*文章详细页上方628*90*/
+											var cpro_id = "u1064372";
+										</script>
+										<script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+									</div>
+									<div class="art_pre_next" style="margin-bottom: 28px;">
+										<a href='/spring/spring-aop-aspectj-annotation-example.html' class='btn'  title='Spring AOP+AspectJ注解实例' style='float:left;'><span class='glyphicon-class glyphicon glyphicon-circle-arrow-left'></span>&nbsp;上一篇</a> 
+										<a href='/spring/spring-objectxml-mapping-example.html' class='btn btn-default' style='float:right;' title='Spring Object到XML映射实例'>下一篇 &nbsp;<span class='glyphicon-class glyphicon glyphicon-circle-arrow-right'></span></a>  
+									</div>
+									<input type="hidden" id="aid" name="aid" value="8181"/>
+									<p style="color: #A00;font-weight:bold;">Windows10用户联盟QQ群： 227270512 </p><hr/>
+									<div>
+	<div>
+		在本教程中，我们将向你展示如何转换上章节中&nbsp;<a href="http://www.yiibai.com/spring/spring-aop-aspectj-annotation-example.html">Spring&nbsp;AOP+AspectJ 注解</a>转成基于XML的配置。
+	</div>
+</div>
+<div>
+	<div>
+		对于那些不喜欢注释，使用JDK1.4，则可以基于XML，而不使用 AspectJ。
+	</div>
+	<div>
+		再次回顾上个 customerBo 接口中的几个方法，以后你将学会如何在 XML文件实现 AspectJ 拦截。
+	</div>
+<pre>package com.yiibai.customer.bo;
+
+public interface CustomerBo {
+
+	void addCustomer();
+	
+	String addCustomerReturnValue();
+	
+	void addCustomerThrowException() throws Exception;
+	
+	void addCustomerAround(String name);
+}</pre>
+	<h2>
+		1. AspectJ &lt;aop:before&gt; = @Before
+	</h2>
+	<p>
+		AspectJ @Before 示例.
+	</p>
+<pre>package com.yiibai.aspect;
+
+import org.aspectj.lang.JoinYiibai;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+
+@Aspect
+public class LoggingAspect {
+
+	@Before("execution(* com.yiibai.customer.bo.CustomerBo.addCustomer(..))")
+	public void logBefore(JoinYiibai joinYiibai) {
+		//...
+	}
+
+}&nbsp;</pre>
+	<p>
+		在XML同等功能，使用&nbsp;&lt;aop:before&gt;.
+	</p>
+<pre>&lt;!-- Aspect --&gt;
+&lt;bean id="logAspect" class="com.yiibai.aspect.LoggingAspect" /&gt;
+
+&lt;aop:config&gt;
+
+  &lt;aop:aspect id="aspectLoggging" ref="logAspect" &gt;
+
+     &lt;!-- @Before --&gt;
+     &lt;aop:pointcut id="pointCutBefore"
+	expression="execution(* com.yiibai.customer.bo.CustomerBo.addCustomer(..))" /&gt;
+
+     &lt;aop:before method="logBefore" pointcut-ref="pointCutBefore" /&gt;
+			
+  &lt;/aop:aspect&gt;
+
+&lt;/aop:config&gt;</pre>
+	<h2>
+		2. AspectJ &lt;aop:after&gt; = @After
+	</h2>
+	<p>
+		AspectJ @After 示例.
+	</p>
+<pre>package com.yiibai.aspect;
+
+import org.aspectj.lang.JoinYiibai;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.After;
+
+@Aspect
+public class LoggingAspect {
+
+	@After("execution(* com.yiibai.customer.bo.CustomerBo.addCustomer(..))")
+	public void logAfter(JoinYiibai joinYiibai) {
+		//...
+	}
+
+}&nbsp;</pre>
+	<p>
+		在XML同等功能，使用&nbsp;&lt;aop:after&gt;实现。
+	</p>
+<pre>&lt;!-- Aspect --&gt;
+&lt;bean id="logAspect" class="com.yiibai.aspect.LoggingAspect" /&gt;
+
+&lt;aop:config&gt;
+
+  &lt;aop:aspect id="aspectLoggging" ref="logAspect" &gt;
+
+     &lt;!-- @After --&gt;
+     &lt;aop:pointcut id="pointCutAfter"
+	expression="execution(* com.yiibai.customer.bo.CustomerBo.addCustomer(..))" /&gt;
+
+     &lt;aop:after method="logAfter" pointcut-ref="pointCutAfter" /&gt;
+			
+  &lt;/aop:aspect&gt;
+
+&lt;/aop:config&gt;</pre>
+	<h2>
+		3. AspectJ &lt;aop:after-returning&gt; = @AfterReturning
+	</h2>
+	<p>
+		AspectJ @AfterReturning 示例.
+	</p>
+<pre>package com.yiibai.aspect;
+
+import org.aspectj.lang.JoinYiibai;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.AfterReturning;
+
+@Aspect
+public class LoggingAspect {
+
+  @AfterReturning(
+   pointcut = "execution(* com.yiibai.customer.bo.CustomerBo.addCustomerReturnValue(..))",
+   returning= "result")
+   public void logAfterReturning(JoinYiibai joinYiibai, Object result) {
+	//...
+   }
+
+}</pre>
+	<p>
+		在XML同等功能 - 使用&nbsp;&lt;aop:after-returning&gt;.
+	</p>
+<pre>&lt;!-- Aspect --&gt;
+&lt;bean id="logAspect" class="com.yiibai.aspect.LoggingAspect" /&gt;
+
+&lt;aop:config&gt;
+
+  &lt;aop:aspect id="aspectLoggging" ref="logAspect" &gt;
+
+    &lt;!-- @AfterReturning --&gt;
+    &lt;aop:pointcut id="pointCutAfterReturning"
+      expression="execution(* com.yiibai.customer.bo.CustomerBo.addCustomerReturnValue(..))" /&gt;
+
+    &lt;aop:after-returning method="logAfterReturning" returning="result" 
+      pointcut-ref="pointCutAfterReturning" /&gt;
+			
+  &lt;/aop:aspect&gt;
+
+&lt;/aop:config&gt;</pre>
+	<h2>
+		4. AspectJ &lt;aop:after-throwing&gt; = @AfterReturning
+	</h2>
+	<p>
+		AspectJ @AfterReturning 示例.
+	</p>
+<pre>package com.yiibai.aspect;
+
+import org.aspectj.lang.JoinYiibai;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.AfterThrowing;
+
+@Aspect
+public class LoggingAspect {
+
+  @AfterThrowing(
+   pointcut = "execution(* com.yiibai.customer.bo.CustomerBo.addCustomerThrowException(..))",
+   throwing= "error")
+  public void logAfterThrowing(JoinYiibai joinYiibai, Throwable error) {
+	//...
+  }
+}</pre>
+	<p>
+		在XML同等功能 - 使用&nbsp;&lt;aop:after-throwing&gt;.
+	</p>
+<pre>&lt;!-- Aspect --&gt;
+&lt;bean id="logAspect" class="com.yiibai.aspect.LoggingAspect" /&gt;
+
+&lt;aop:config&gt;
+
+  &lt;aop:aspect id="aspectLoggging" ref="logAspect" &gt;
+
+    &lt;!-- @AfterThrowing --&gt;
+    &lt;aop:pointcut id="pointCutAfterThrowing"
+      expression="execution(* com.yiibai.customer.bo.CustomerBo.addCustomerThrowException(..))" /&gt;
+			
+    &lt;aop:after-throwing method="logAfterThrowing" throwing="error" 
+      pointcut-ref="pointCutAfterThrowing"  /&gt;
+			
+  &lt;/aop:aspect&gt;
+
+&lt;/aop:config&gt;</pre>
+	<h2>
+		5. AspectJ &lt;aop:after-around&gt; = @Around
+	</h2>
+	<p>
+		AspectJ @Around 示例.
+	</p>
+<pre>package com.yiibai.aspect;
+
+import org.aspectj.lang.ProceedingJoinYiibai;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Around;
+
+@Aspect
+public class LoggingAspect {
+
+	@Around("execution(* com.yiibai.customer.bo.CustomerBo.addCustomerAround(..))")
+	public void logAround(ProceedingJoinYiibai joinYiibai) throws Throwable {
+		//...
+	}
+	
+}</pre>
+	<p>
+		在XML同等功能 - 使用&nbsp;&lt;aop:after-around&gt;.
+	</p>
+<pre>&lt;!-- Aspect --&gt;
+&lt;bean id="logAspect" class="com.yiibai.aspect.LoggingAspect" /&gt;
+
+&lt;aop:config&gt;
+
+   &lt;aop:aspect id="aspectLoggging" ref="logAspect" &gt;
+
+    &lt;!-- @Around --&gt;
+   &lt;aop:pointcut id="pointCutAround"
+      expression="execution(* com.yiibai.customer.bo.CustomerBo.addCustomerAround(..))" /&gt;
+			
+   &lt;aop:around method="logAround" pointcut-ref="pointCutAround"  /&gt;
+			
+  &lt;/aop:aspect&gt;
+
+&lt;/aop:config&gt;</pre>
+	<h2>
+		完整的 XML 实例
+	</h2>
+	<div>
+		查看完整的基于XML的&nbsp;AspectJ&nbsp;配置文件。
+	</div>
+<pre>&lt;beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd "&gt;
+
+&lt;aop:aspectj-autoproxy /&gt;
+
+&lt;bean id="customerBo" class="com.yiibai.customer.bo.impl.CustomerBoImpl" /&gt;
+
+&lt;!-- Aspect --&gt;
+&lt;bean id="logAspect" class="com.yiibai.aspect.LoggingAspect" /&gt;
+
+&lt;aop:config&gt;
+
+  &lt;aop:aspect id="aspectLoggging" ref="logAspect"&gt;
+
+    &lt;!-- @Before --&gt;
+    &lt;aop:pointcut id="pointCutBefore"
+      expression="execution(* com.yiibai.customer.bo.CustomerBo.addCustomer(..))" /&gt;
+
+    &lt;aop:before method="logBefore" pointcut-ref="pointCutBefore" /&gt;
+
+    &lt;!-- @After --&gt;
+    &lt;aop:pointcut id="pointCutAfter"
+       expression="execution(* com.yiibai.customer.bo.CustomerBo.addCustomer(..))" /&gt;
+
+    &lt;aop:after method="logAfter" pointcut-ref="pointCutAfter" /&gt;
+
+    &lt;!-- @AfterReturning --&gt;
+    &lt;aop:pointcut id="pointCutAfterReturning"
+       expression="execution(* com.yiibai.customer.bo.CustomerBo.addCustomerReturnValue(..))" /&gt;
+
+    &lt;aop:after-returning method="logAfterReturning"
+      returning="result" pointcut-ref="pointCutAfterReturning" /&gt;
+
+    &lt;!-- @AfterThrowing --&gt;
+    &lt;aop:pointcut id="pointCutAfterThrowing"
+      expression="execution(* com.yiibai.customer.bo.CustomerBo.addCustomerThrowException(..))" /&gt;
+
+    &lt;aop:after-throwing method="logAfterThrowing"
+      throwing="error" pointcut-ref="pointCutAfterThrowing" /&gt;
+
+    &lt;!-- @Around --&gt;
+    &lt;aop:pointcut id="pointCutAround"
+      expression="execution(* com.yiibai.customer.bo.CustomerBo.addCustomerAround(..))" /&gt;
+
+    &lt;aop:around method="logAround" pointcut-ref="pointCutAround" /&gt;
+
+  &lt;/aop:aspect&gt;
+
+&lt;/aop:config&gt;
+
+&lt;/beans&gt;</pre>
+	<div>
+		下载源代码 –&nbsp;<a href="http://pan.baidu.com/s/1nuwrmOh" target="_blank">http://pan.baidu.com/s/1nuwrmOh</a> 
+	</div>
+</div><br/>
+									
+									<div style="float:left;margin-bottom: 6px;"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+										<!-- 文章中间 -->
+										<ins class="adsbygoogle"
+											 style="display:inline-block;width:728px;height:90px"
+											 data-ad-client="ca-pub-1090193214637198"
+											 data-ad-slot="6494738921"></ins>
+										<script>
+										(adsbygoogle = window.adsbygoogle || []).push({});
+										</script></div>
+									<br/>
+									
+									<b>标签：<a href="http://www.yiibai.com/tag/Spring/" target="_blank">Spring</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.yiibai.com/tag/AOP/" target="_blank">AOP</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.yiibai.com/tag/AspectJ/" target="_blank">AspectJ</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.yiibai.com/tag/XML配置/" target="_blank">XML配置</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.yiibai.com/tag/实例/" target="_blank">实例</a>&nbsp;&nbsp;&nbsp;&nbsp;</b>					
+									<div class="copyright" style="width:100%;float:left;">
+									
+											本站文章除注明转载外，均为本站原创或编译<br>
+									欢迎任何形式的转载，但请务必注明出处，尊重他人劳动共创优秀实例教程<br>
+									转载请注明：文章转载自：<strong>易百教程</strong> [<a href="http://www.yiibai.com/">http:/www.yiibai.com</a>]<br>
+									本文标题：<b>Spring AOP+AspectJ在XML配置实例</b><br>
+									本文地址：<a href="http://www.yiibai.com/spring/spring-aop-aspectj-in-xml-configuration-example.html">http://www.yiibai.com/spring/spring-aop-aspectj-in-xml-configuration-example.html</a><br>
+									</div>
+									<div class="art_pre_next" style="margin-bottom: 8px;">
+										<a href='/spring/spring-aop-aspectj-annotation-example.html' class='btn'  title='Spring AOP+AspectJ注解实例' style='float:left;'><span class='glyphicon-class glyphicon glyphicon-circle-arrow-left'></span>&nbsp;上一篇</a> 
+										<a href='/spring/spring-objectxml-mapping-example.html' class='btn btn-default' style='float:right;' title='Spring Object到XML映射实例'>下一篇 &nbsp;<span class='glyphicon-class glyphicon glyphicon-circle-arrow-right'></span></a>  
+									</div>
+									<!--// google/baidu adv 
+									<div style="margin-bottom: 0px;float:left;margin-top: 16px;padding-bottom:0px;">
+																			
+									</div>-->
+
+									
+								</div>
+								<div style="float: right;width: 14%;">
+									
+								</div>
+							</div>
+							<div class="row" style="float:left;width:80%; margin-top:12px;">
+								
+								<div style="width:720px;margin-bottom: 8px;float:left;">
+									<script type="text/javascript">
+										var cpro_id = "u1064372";
+									</script>
+									<script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+								</div>
+								<!-- Comments -->
+								<!-- Duoshuo Comment BEGIN -->
+								<!-- 多说评论框 start -->
+								<div class="ds-thread" data-thread-key="8181" data-title="Spring AOP+AspectJ在XML配置实例" data-url="http://www.yiibai.com/spring/spring-aop-aspectj-in-xml-configuration-example.html"></div>
+								<!-- 多说评论框 end -->
+								<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+								<script type="text/javascript">
+								var duoshuoQuery = {short_name:"yiibai"};
+									(function() {
+										var ds = document.createElement('script');
+										ds.type = 'text/javascript';ds.async = true;
+										ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+										ds.charset = 'UTF-8';
+										(document.getElementsByTagName('head')[0] 
+										 || document.getElementsByTagName('body')[0]).appendChild(ds);
+									})();
+									</script>
+								<!-- 多说公共JS代码 end -->
+									<!-- Duoshuo Comment END -->
+								</div>
+							<!-- Comments -->
+
+						</div>
+
+					</div>
+					<!-- End Blog Post -->
+				</div>
+			</div>
+		</div>
+		<!-- Footer -->
+		<div class="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="footer-copyright">
+					易百 &copy; <span id="year-from"></span> <a href="http://www.miitbeian.gov.cn/" target="_blank">琼ICP备13001417号-3</a>  <b>Email: </b><img src="/static.v2.0/images/linkmail.png"/>
+					
+					&nbsp;&nbsp;<a href="http://www.yiibai.com/html/about/about_us.html" target="_blank">关于我们</a>
+					 &nbsp;&nbsp;<a href="/about/feedback" target="_blank">反馈建议/意见</a> &nbsp;&nbsp;
+				<script type="text/javascript">
+				var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+				document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F424e222704e2274e37a8169110e6e00a' type='text/javascript'%3E%3C/script%3E"));
+				</script>
+				<script src="http://s23.cnzz.com/stat.php?id=4255568&web_id=4255568" language="JavaScript"></script>
+				
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Javascripts -->
+
+
+
+	</body>
+	<script src="/static.v2.0/js/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/static.v2.0/js/jquery.min.js"><\/script>')</script>
+	<script src="/static.v2.0/js/bootstrap.min.js"></script>
+	<script src="/static.v2.0/js/leaflet.js"></script>
+	<script src="/static.v2.0/js/jquery.fitvids.js"></script>
+	<script src="/static.v2.0/js/jquery.sequence-min.js"></script>
+	<script src="/static.v2.0/js/jquery.bxslider.js"></script>
+	<script src="/static.v2.0/js/main-menu.js"></script>
+	<script src="/static.v2.0/js/template.js"></script>
+	<script type="text/javascript" src="/static.v2.0/js/custom.js"></script>
+	<!-- BD adv     /*视窗-(250*200)*/ -->
+	<script type="text/javascript">
+	var cpro_id = "u1754823";
+	</script>
+	<script src="http://cpro.baidustatic.com/cpro/ui/f.js" type="text/javascript"></script>
+	<!-- BD adv     /*视窗-(250*200)*/ End -->
+</html>

@@ -89,7 +89,7 @@ public class RestController {
 	 * @return
 	 * 2016年10月11日 下午2:13:37
 	 */
-	@RequestMapping(value="/user/{age:\\d+}",method=RequestMethod.DELETE)
+	@RequestMapping(value="/user/{id:\\d+}",method=RequestMethod.DELETE)
 	public @ResponseBody Object deleteUser(@PathVariable("id") int id){
 		logger.debug("删除id为"+id+"的用户");
 		User user = userService.getUserById(id);
