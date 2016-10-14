@@ -28,6 +28,7 @@
 	</security:http>
 	<security:authentication-manager>
 	 <security:authentication-provider>
+	  <!-- 1.基础用户  -->
 	   <security:user-service>
 	     <security:user name="xiao"  password="abc" authorities="ROLE_ADMIN"/>
 	   </security:user-service>
