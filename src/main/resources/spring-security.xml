@@ -31,7 +31,7 @@
 		<security:intercept-url pattern="/main/common"
 			access="permitAll" />
 		<security:intercept-url pattern="/auth/login"
-			access="permitAll" />
+			access="permitAll"  />
 		<security:intercept-url pattern="/rest/say"
 			access="hasRole('ROLE_USER')" />
 		<!-- 如果还有地层路径，也需要写出来。 -->
@@ -41,7 +41,9 @@
 	<security:authentication-manager>
 		<security:authentication-provider>
 			<!-- 1.基础用户 -->
+			<!-- <security:jdbc-user-service data-source-ref="dataSource" users-by-username-query="select * ,true from user_t where username = ?"/> -->
 			<security:user-service>
+		
 				<security:user name="xiao" password="abc" authorities="ROLE_USER" />
 			</security:user-service>
 		</security:authentication-provider>
