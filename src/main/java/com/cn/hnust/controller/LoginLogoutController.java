@@ -37,6 +37,27 @@ public class LoginLogoutController {
         return "loginpage";  
   
     }  
+    
+    /** 
+     * 指向登录页面 
+     */  
+    @RequestMapping(value = "/loginAction", method = RequestMethod.POST)  
+    public String getLoginAction(  
+    		@RequestParam(value = "error", required = false) boolean error,  
+    		ModelMap model) {  
+    	
+    	logger.debug("Received request to show login page");  
+    	
+    	if (error == true) {  
+    		// Assign an error message  
+    		model.put("error",  
+    				"You have entered an invalid username or password!");  
+    	} else {  
+    		model.put("error", "");  
+    	}  
+    	return "loginpage";  
+    	
+    }  
   
     /** 
      * 指定无访问额权限页面 

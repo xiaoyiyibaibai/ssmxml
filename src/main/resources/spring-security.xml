@@ -27,11 +27,11 @@
 		<!-- security:intercept-url  是有顺序的，顺序是自上而下，只要找到一个就会拦截，底下的就不起作用。-->
 		
 		<security:intercept-url pattern="/main/admin"
-			access="hasRole('ROLE_ADMIN')" />
+			access="hasRole('ROLE_ADMIN')"  requires-channel="https"/>
 		<security:intercept-url pattern="/main/common"
 			access="permitAll" />
 		<security:intercept-url pattern="/auth/login"
-			access="hasRole('ROLE_ADMIN')" />
+			access="permitAll" />
 		<security:intercept-url pattern="/rest/say"
 			access="hasRole('ROLE_USER')" />
 		<!-- 如果还有地层路径，也需要写出来。 -->
