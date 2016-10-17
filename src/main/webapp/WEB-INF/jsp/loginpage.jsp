@@ -8,7 +8,6 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	System.out.println(basePath);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -16,8 +15,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>登录页面</title>
 <link rel="stylesheet" href="<%=basePath%>css/jquery-ui.css" />
-<script type="text/javascript" src="<%=basePath%>js/jquery-3.1.1.min.js" />
-<script type="text/javascript" src="<%=basePath%>js/jquery-ui.min.js" />
+<link rel="stylesheet" href="<%=basePath%>css/jquery-ui.structure.css" />
+<script type="text/javascript" src="<%=basePath%>js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/jquery-ui.min.js"></script>
 </head>
 <body>
 
@@ -25,8 +25,7 @@
 
 	<div id="login-error">${error}</div>
 
-	<form action="<%=basePath%>auth/loginAction"
-		method="post">
+	<form action="<%=basePath%>auth/loginAction" method="post">
 
 		<p>
 			<label for="userName">userName</label> <input id="userName"
@@ -40,10 +39,10 @@
 
 		<p>
 			<label for="date">date</label><input type="text" name="date"
-			id="date" />
+				id="date" />
 		</p>
 
-		<input type="submit" value="Login" /> 
+		<input type="submit" value="Login" />
 
 	</form>
 	<script type="text/javascript">
