@@ -29,13 +29,13 @@
 		method="post">
 
 		<p>
-			<label for="j_username">Username</label> <input id="userName"
+			<label for="userName">userName</label> <input id="userName"
 				name="userName" type="text" />
 		</p>
 
 		<p>
-			<label for="j_password">Password</label> <input id="j_password"
-				name="j_password" type="password" />
+			<label for="password">password</label> <input id="password"
+				name="password" type="password" />
 		</p>
 
 		<p>
