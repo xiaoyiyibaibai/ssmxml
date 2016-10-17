@@ -51,4 +51,17 @@ public class LoginLogoutController {
         return "deniedpage";  
   
     }  
+    /** 
+     * 错误页面
+     *  
+     * @return 
+     */  
+    @RequestMapping(value = "/error", method = RequestMethod.GET)  
+    public String getErrorPage() {  
+    	
+    	logger.debug("Received request to show error page");  
+    	
+    	return "hello";  
+    	
+    }  
 }  

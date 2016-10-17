@@ -14,6 +14,5 @@
 <title>你好！springmvc</title>
 </head>
 <body>
-${message}
 </body>
 </html>
