@@ -8,7 +8,7 @@
                         http://www.springframework.org/schema/context  
                         http://www.springframework.org/schema/context/spring-context-4.2.xsd  
                         http://www.springframework.org/schema/security
-                        http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+                        http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
 	<!-- Spring-Security 的配置 -->
 	<!-- 注意开启use-expressions.表示开启表达式. see:http://www.family168.com/tutorial/springsecurity3/html/el-access.html -->
@@ -27,16 +27,16 @@
 		<!-- security:intercept-url  是有顺序的，顺序是自上而下，只要找到一个就会拦截，底下的就不起作用。-->
 		
 		<security:intercept-url pattern="/main/admin"
-			access="hasRole('ROLE_ADMIN')"  requires-channel="https"/>
-		<security:intercept-url pattern="/main/common"
-			access="permitAll" />
+			access="ROLE_ADMIN"  requires-channel="https"/>
+<!-- 		<security:intercept-url pattern="/main/common"
+			access="hasRole('permitAll')" />
 		<security:intercept-url pattern="/auth/login"
-			access="permitAll"  />
+			access="hasRole('permitAll')"  /> -->
 		<security:intercept-url pattern="/rest/say"
-			access="hasRole('ROLE_USER')" />
+			access="ROLE_USER" />
 		<!-- 如果还有地层路径，也需要写出来。 -->
 		<security:intercept-url pattern="/rest/user/*"  
-			access="hasRole('ROLE_ADMIN')" />
+			access="ROLE_ADMIN" />
 	</security:http>
 	<security:authentication-manager>
 		<security:authentication-provider>
