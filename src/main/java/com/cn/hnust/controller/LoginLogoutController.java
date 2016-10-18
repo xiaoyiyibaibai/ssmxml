@@ -22,7 +22,7 @@ public class LoginLogoutController {
      */  
     @RequestMapping(value = "/login", method = RequestMethod.GET)  
     public String getLoginPage(  
-            @RequestParam(value = "error", required = false) boolean error,  
+            @RequestParam(value = "error") boolean error,  
             ModelMap model) {  
   
         logger.debug("Received request to show login page");  
@@ -43,7 +43,7 @@ public class LoginLogoutController {
      */  
     @RequestMapping(value = "/loginAction", method = RequestMethod.POST)  
     public String getLoginAction(  
-    		@RequestParam(value = "error", required = false) boolean error,  
+    		@RequestParam(value = "error") boolean error,  
     		ModelMap model) {  
     	
     	logger.debug("Received request to show login page");  

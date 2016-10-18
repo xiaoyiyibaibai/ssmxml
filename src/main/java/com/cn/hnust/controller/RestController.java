@@ -174,7 +174,7 @@ public class RestController {
  */
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public @ResponseBody
-	List<User> listPerson(@RequestParam(value = "name", required = false, defaultValue = "") String name) {
+	List<User> listPerson(@RequestParam(value = "name", defaultValue = "") String name) {
 
 		logger.info("查询人员name like " + name);
 		List<User> lstPersons = this.userService.findAllUser();
