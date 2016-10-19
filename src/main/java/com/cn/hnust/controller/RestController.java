@@ -29,16 +29,18 @@ import com.wordnik.swagger.annotations.ApiParam;
  * @author xiaodonghong
  * 2016年10月11日 下午1:37:53
  */
-@Api(description="Restful风格测试", value = "Restful风格测试类")
 @Controller
 @RequestMapping(value="/rest")
+@Api(description="Restful风格测试", value = "Restful风格测试类",position=1)
 public class RestController {
 	@Resource
 	private IUserService userService;
 	/** 日志实例 */
 	private static final Logger logger = LoggerFactory.getLogger(RestController.class);
 	@RequestMapping(value="/hello")
+	@ApiOperation(httpMethod="GET" ,notes="你好！",value="欢迎页面")
 	public @ResponseBody String hello(){
+		//httpMethod="GET"：当@RequestMapping无限请求类型时，所有请求类型，都会显示出来。设置httpMethod，在swagger中，只显示里面的请求类型。
 		return "你好！hello";
 	}
 	/**
@@ -48,8 +50,8 @@ public class RestController {
 	 * 2016年10月11日 下午2:04:58
 	 */
 	@RequestMapping(value="/say/{msg}",produces="application/json;charset=UTF-8")
-	@ApiOperation(httpMethod="GET" ,notes="你好！",value="url中有参数")
-	public @ResponseBody String say(@ApiParam(value="内容")String msg){
+	@ApiOperation(httpMethod="GET" ,notes="你好！",value="输出内容")
+	public @ResponseBody String say(@ApiParam(value="内容") @PathVariable("msg") String msg){
 		logger.debug("浏览");
 		return "{\"msg\":\"you say:'" + msg + "'\"}";
 	}
@@ -181,9 +183,14 @@ public class RestController {
  * 2016年10月11日 下午2:09:26
  */
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
+	@ApiOperation(httpMethod="GET" ,notes="用户列表！",value="用户列表", produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	List<User> listPerson(@RequestParam(value = "name", defaultValue = "") String name) {
-
+	List<User> listPerson(@ApiParam(value="用户名",required=true) @RequestParam(value = "name", defaultValue = "") String name) {
+/*		@RequestMapping(value = "/user", method = RequestMethod.GET)
+		@ApiOperation(httpMethod="PUT" ,notes="用户列表！",value="用户列表", produces = MediaType.APPLICATION_JSON_VALUE)
+		两者不一致的时候，不会再swagger中显示。
+		*
+		*/
 		logger.info("查询人员name like " + name);
 		List<User> lstPersons = this.userService.findAllUser();
 
