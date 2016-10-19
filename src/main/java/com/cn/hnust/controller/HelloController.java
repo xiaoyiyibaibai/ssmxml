@@ -3,6 +3,7 @@ package com.cn.hnust.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
@@ -20,7 +21,6 @@ public class HelloController implements Controller {
 		view.addObject("message", message);
 		//设置视图
 		view.setViewName("hello");
-		
 		//已经在springmvc.xml中添加了前后缀了，即/WEB-INF/jsp/hello.jsp
 		return view;
 	}

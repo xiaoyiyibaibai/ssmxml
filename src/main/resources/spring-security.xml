@@ -26,10 +26,10 @@
 	<!-- 3.2 TokenServices 配置 1). TokenStore, 使用JdbcTokenStore, 将token信息存放数据库, 
 		需要提供一个dataSource对象; 也可使用InMemoryTokenStore存于内存中 -->
 	<!--<beans:bean id="tokenStore" class="org.springframework.security.oauth2.provider.token.InMemoryTokenStore"/> -->
-	<beans:bean id="tokenStore"
-		class="org.springframework.security.oauth2.provider.token.JdbcTokenStore">
-		<beans:constructor-arg index="0" ref="dataSource" />
-	</beans:bean>
+	<bean id="tokenStore"
+		class="org.springframework.security.oauth2.provider.token.store.JdbcTokenStore">
+		<constructor-arg index="0" ref="dataSource" />
+	</bean>
 	<security:http>
 		<security:form-login login-processing-url="/static/j_spring_security_check"
 			login-page="/auth/login" authentication-failure-url="/auth/error" />
