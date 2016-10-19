@@ -5,7 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;  
 import org.springframework.web.bind.annotation.RequestMapping;  
 import org.springframework.web.bind.annotation.RequestMethod;  
-import org.springframework.web.bind.annotation.RequestParam;  
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;  
   /**
    * 用于测试spring security使用。
    * @author xiaodonghong
@@ -13,16 +17,18 @@ import org.springframework.web.bind.annotation.RequestParam;
    * 2016年10月12日 上午10:53:50
    */
 @Controller  
-@RequestMapping(value= "/auth")  
+@RequestMapping(value= "/auth") 
+@Api(description="登录和退出处理类",value="/auth")
 public class LoginLogoutController {  
     protected static Logger logger = LoggerFactory.getLogger(LoginLogoutController.class);  
   
     /** 
      * 指向登录页面 
      */  
+    @ApiOperation(value="用户登录" ,notes="登录用户标示",httpMethod="GET")
     @RequestMapping(value = "/login", method = RequestMethod.GET)  
     public String getLoginPage(  
-            @RequestParam(value = "error") boolean error,  
+           @ApiParam(value="是否报错",required=true) @RequestParam(value = "error") boolean error,  
             ModelMap model) {  
   
         logger.debug("Received request to show login page");  

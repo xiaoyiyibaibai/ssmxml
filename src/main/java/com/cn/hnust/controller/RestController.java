@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.annotation.WebServlet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONObject;
 import com.cn.hnust.pojo.User;
 import com.cn.hnust.service.IUserService;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
 
 
 
@@ -26,6 +29,7 @@ import com.cn.hnust.service.IUserService;
  * @author xiaodonghong
  * 2016年10月11日 下午1:37:53
  */
+@Api(description="Restful风格测试", value = "Restful风格测试类")
 @Controller
 @RequestMapping(value="/rest")
 public class RestController {
@@ -33,7 +37,6 @@ public class RestController {
 	private IUserService userService;
 	/** 日志实例 */
 	private static final Logger logger = LoggerFactory.getLogger(RestController.class);
-	private static List<User> stList = new ArrayList<User>();
 	@RequestMapping(value="/hello")
 	public @ResponseBody String hello(){
 		return "你好！hello";
@@ -45,7 +48,8 @@ public class RestController {
 	 * 2016年10月11日 下午2:04:58
 	 */
 	@RequestMapping(value="/say/{msg}",produces="application/json;charset=UTF-8")
-	public @ResponseBody String say(String msg){
+	@ApiOperation(httpMethod="GET" ,notes="你好！",value="url中有参数")
+	public @ResponseBody String say(@ApiParam(value="内容")String msg){
 		logger.debug("浏览");
 		return "{\"msg\":\"you say:'" + msg + "'\"}";
 	}
@@ -67,8 +71,9 @@ public class RestController {
 	 * @return
 	 * 2016年10月11日 下午2:04:35
 	 */
+	@ApiOperation(httpMethod="GET" ,notes="根据用户id获取用户！",value="获取用户", produces = MediaType.APPLICATION_JSON_VALUE)
 	@RequestMapping(value="/user/{age:\\d+}",method=RequestMethod.GET)
-	public @ResponseBody User getUser(@PathVariable("age") int id){
+	public @ResponseBody User getUser(@ApiParam(value="用户id值") @PathVariable("age") int id){
 		logger.debug("获取学生的年龄="+id);
 		User st = userService.getUserById(id);
 		return st;
@@ -89,8 +94,9 @@ public class RestController {
 	 * @return
 	 * 2016年10月11日 下午2:13:37
 	 */
+	@ApiOperation(httpMethod="DELETE" ,notes="根据用户id删除用户！",value="删除用户", produces = MediaType.APPLICATION_JSON_VALUE)
 	@RequestMapping(value="/user/{id:\\d+}",method=RequestMethod.DELETE)
-	public @ResponseBody Object deleteUser(@PathVariable("id") int id){
+	public @ResponseBody Object deleteUser(@ApiParam(value="用户id值") @PathVariable("id") int id){
 		logger.debug("删除id为"+id+"的用户");
 		User user = userService.getUserById(id);
 		userService.deleteUser(id);
@@ -117,6 +123,7 @@ public class RestController {
 	 * @return
 	 * 2016年10月11日 下午2:11:43
 	 */
+	@ApiOperation(httpMethod="POST" ,notes="添加用户！",value="添加用户", produces = MediaType.APPLICATION_JSON_VALUE)
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
 	public @ResponseBody
 	Object addUser(User person) {
@@ -143,6 +150,7 @@ public class RestController {
 	 * @return
 	 * 2016年10月11日 下午2:14:40
 	 */
+	@ApiOperation(httpMethod="PUT" ,notes="更新用户！",value="更新用户", produces = MediaType.APPLICATION_JSON_VALUE)
 	@RequestMapping(value = "/user", method = RequestMethod.PUT)
 	public @ResponseBody
 	Object updatePerson(User person) {
