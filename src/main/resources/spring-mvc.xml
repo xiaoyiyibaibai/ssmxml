@@ -14,9 +14,9 @@
 		content-negotiation-manager="contentNegotiationManagerFactoryBean" />
 	<!-- 解释：swagger会扫描 base-package包下的所有类，生成api文档 -->
 	<!-- 引入swagger的后台配置 -->
-	<bean class="com.mangofactory.swagger.configuration.SpringSwaggerConfig" />
+     <bean id="springSwaggerConfig" class="com.mangofactory.swagger.configuration.SpringSwaggerConfig" /> 
 	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
-	<context:component-scan base-package="com.cn.hnust.controller" />
+	<context:component-scan base-package="com.cn.hnust.controller,com.cn.hnust.pojo" />
 	<!-- 对静态资源文件的访问 不支持访问WEB-INF目录 -->
 	<mvc:default-servlet-handler />
 	<bean

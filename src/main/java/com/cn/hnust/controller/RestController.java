@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONObject;
 import com.cn.hnust.pojo.User;
 import com.cn.hnust.service.IUserService;
+import com.mangofactory.swagger.annotations.ApiIgnore;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
@@ -32,6 +33,8 @@ import com.wordnik.swagger.annotations.ApiResponses;
  * 其中@ApiOperation和@ApiParam为添加的API相关注解，个参数说明如下： 
 @ApiOperation(value = “接口说明”, httpMethod = “接口请求方式”, response = “接口返回参数类型”, notes = “接口发布说明”；其他参数可参考源码； 
 @ApiParam(required = “是否必须参数”, name = “参数名称”, value = “参数具体描述”
+@ApiIgnore 在swagger中忽略该接口（不显示该接口）。
+@ApiResponses:接口访问消息的显示码code在400等情况下的中文显示。
  * 2016年10月11日 下午1:37:53
  */
 @Controller
@@ -44,6 +47,7 @@ public class RestController {
 	private static final Logger logger = LoggerFactory.getLogger(RestController.class);
 	@RequestMapping(value="/hello")
 	@ApiOperation(httpMethod="GET" ,notes="你好！",value="欢迎页面")
+	@ApiIgnore
 	public @ResponseBody String hello(){
 		//httpMethod="GET"：当@RequestMapping无限请求类型时，所有请求类型，都会显示出来。设置httpMethod，在swagger中，只显示里面的请求类型。
 		return "你好！hello";
