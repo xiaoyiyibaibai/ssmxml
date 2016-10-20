@@ -21,12 +21,17 @@ import com.cn.hnust.service.IUserService;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 
 
 
 /**
  * 基于Restful风格架构
  * @author xiaodonghong
+ * 其中@ApiOperation和@ApiParam为添加的API相关注解，个参数说明如下： 
+@ApiOperation(value = “接口说明”, httpMethod = “接口请求方式”, response = “接口返回参数类型”, notes = “接口发布说明”；其他参数可参考源码； 
+@ApiParam(required = “是否必须参数”, name = “参数名称”, value = “参数具体描述”
  * 2016年10月11日 下午1:37:53
  */
 @Controller
@@ -154,6 +159,14 @@ public class RestController {
 	 */
 	@ApiOperation(httpMethod="PUT" ,notes="更新用户！",value="更新用户", produces = MediaType.APPLICATION_JSON_VALUE)
 	@RequestMapping(value = "/user", method = RequestMethod.PUT)
+	@ApiResponses(value = {  
+			@ApiResponse(code = 200, message = "更新成功"),  
+			@ApiResponse(code = 201, message = "成功创建"),  
+			@ApiResponse(code = 401, message = "未授权"),  
+			@ApiResponse(code = 403, message = "禁止访问"),  
+			@ApiResponse(code = 404, message = "找不到页面"),  
+			@ApiResponse(code = 500, message = "内部报错")}  
+			)  
 	public @ResponseBody
 	Object updatePerson(User person) {
 		logger.info("更新人员信息id=" );
@@ -162,11 +175,11 @@ public class RestController {
 		userService.updateUser(person);
 		return jsonObject;
 	}
-/**
- * get类型的可以在url中直接访问。
- * http://localhost:8080/springmvc/rest/user?name=233
- * 
- * listPerson:function(){
+	/**
+	 * get类型的可以在url中直接访问。
+	 * http://localhost:8080/springmvc/rest/user?name=233
+	 * 
+	 * listPerson:function(){
 				$.ajax({
 					url: dekota.url + 'student',
 					type: 'POST',//注意在传参数时，加：_method:'PATCH'　将对应后台的PATCH请求方法
@@ -178,19 +191,19 @@ public class RestController {
 					$.UIkit.notify("请求失败！", {status:'danger',timeout:2000});
 				});
 			}
- * @param name
- * @return
- * 2016年10月11日 下午2:09:26
- */
+	 * @param name
+	 * @return
+	 * 2016年10月11日 下午2:09:26
+	 */
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	@ApiOperation(httpMethod="GET" ,notes="用户列表！",value="用户列表", produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	List<User> listPerson(@ApiParam(value="用户名",required=true) @RequestParam(value = "name", defaultValue = "") String name) {
-/*		@RequestMapping(value = "/user", method = RequestMethod.GET)
+		/*		@RequestMapping(value = "/user", method = RequestMethod.GET)
 		@ApiOperation(httpMethod="PUT" ,notes="用户列表！",value="用户列表", produces = MediaType.APPLICATION_JSON_VALUE)
 		两者不一致的时候，不会再swagger中显示。
-		*
-		*/
+		 *
+		 */
 		logger.info("查询人员name like " + name);
 		List<User> lstPersons = this.userService.findAllUser();
 
