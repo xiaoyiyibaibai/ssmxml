@@ -46,7 +46,7 @@
 			access="ROLE_USER" />
 		<!-- 如果还有地层路径，也需要写出来。 -->
 		<security:intercept-url pattern="/rest/user/*"
-			access="ROLE_ADMIN" />
+			access="ROLE_USER" />
 	</security:http>
 	<security:authentication-manager>
 		<security:authentication-provider>
