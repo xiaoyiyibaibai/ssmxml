@@ -24,6 +24,7 @@ public class LoginLogoutController {
   
     /** 
      * 指向登录页面 
+     * http://localhost:8080/springmvc/auth/login?error=false
      */  
     @ApiOperation(value="用户登录" ,notes="登录用户标示",httpMethod="GET")
     @RequestMapping(value = "/login", method = RequestMethod.GET)  
