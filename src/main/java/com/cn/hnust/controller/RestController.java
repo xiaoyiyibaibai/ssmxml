@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -137,7 +138,7 @@ public class RestController {
 	@ApiOperation(httpMethod="POST" ,notes="添加用户！",value="添加用户", produces = MediaType.APPLICATION_JSON_VALUE)
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
 	public @ResponseBody
-	Object addUser(User person) {
+	Object addUser(@ApiParam(value="用户信息",required=true) User person) {
 		logger.info("注册人员信息成功id=" );
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("msg", "注册人员信息成功");
@@ -171,8 +172,8 @@ public class RestController {
 			@ApiResponse(code = 404, message = "找不到页面"),  
 			@ApiResponse(code = 500, message = "内部报错")}  
 			)  
-	public @ResponseBody
-	Object updatePerson(User person) {
+	public @ResponseBody 
+	Object updatePerson(@ApiParam(value="用户信息",required=true,allowMultiple=true,name="User")@RequestBody User person) {
 		logger.info("更新人员信息id=" );
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("msg", "更新人员信息成功");
