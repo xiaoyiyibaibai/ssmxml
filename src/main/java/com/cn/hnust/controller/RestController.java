@@ -84,9 +84,9 @@ public class RestController {
 	 * 2016年10月11日 下午2:04:35
 	 */
 	@ApiOperation(httpMethod="GET" ,notes="根据用户id获取用户！",value="获取用户", produces = MediaType.APPLICATION_JSON_VALUE)
-	@RequestMapping(value="/user/{age:\\d+}",method=RequestMethod.GET)
-	public @ResponseBody User getUser(@ApiParam(value="用户id值") @PathVariable("age") int id){
-		logger.debug("获取学生的年龄="+id);
+	@RequestMapping(value="/user/{id:\\d+}",method=RequestMethod.GET)
+	public @ResponseBody User getUser(@ApiParam(value="用户id值") @PathVariable("id") int id){
+		logger.debug("获取学生的id="+id);
 		User st = userService.getUserById(id);
 		return st;
 	}	
@@ -203,13 +203,12 @@ public class RestController {
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	@ApiOperation(httpMethod="GET" ,notes="用户列表！",value="用户列表", produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	List<User> listPerson(@ApiParam(value="用户名",required=true) @RequestParam(value = "name", defaultValue = "") String name) {
+	List<User> listPerson() {
 		/*		@RequestMapping(value = "/user", method = RequestMethod.GET)
 		@ApiOperation(httpMethod="PUT" ,notes="用户列表！",value="用户列表", produces = MediaType.APPLICATION_JSON_VALUE)
 		两者不一致的时候，不会再swagger中显示。
 		 *
 		 */
-		logger.info("查询人员name like " + name);
 		List<User> lstPersons = this.userService.findAllUser();
 
 		return lstPersons;
