@@ -1,0 +1,40 @@
+ springMVC <spring:message>国际化
+
+
+1、在spring配置文件中添加如下配置文件
+
+<!-- 国际化 -->  
+	<!-- 配置国际化资源文件路径 -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename">
+			<!-- 定义消息资源文件的相对路径 -->
+			<value>messages/fmt_resource</value>
+		</property>
+	</bean>
+<bean id="localeResolver"  
+    class="org.springframework.web.servlet.i18n.CookieLocaleResolver" />  
+
+2、在src根目录下面新建下面两个文件
+message_zh_CN.properties
+hello=hello1\u4F60\u597D{0}
+ 
+message_en_US.properties
+hello=english{0}
+ 
+3、在web目录下面新建一个jsp文件
+在 页面中添加如下内容，（添加标签）
+[java] view plain copy 在CODE上查看代码片派生到我的代码片
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>  
+备注：uri的内容在org.springframework.web.servlet-3.1.1.RELEASE.jar包下面的META-INF/spring.tld文件。
+页面的编码方式，应该选用utf-8 
+<%@ page language="java"  pageEncoding="UTF-8"%> 
+ 
+4、显示资源文件内的数据
+<spring:message code="hello" arguments="111,222" argumentSeparator=",">
+ 
+备注：arguments是用来给资源文件添加参数的，argumentSeparator是用来分割多个参数的标记 
+ 
+5、页面显示内容
+hello1你好111
+
