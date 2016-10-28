@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Struts2 的国际化实现 - lihui_yy - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=XrHjCqi-oUg9M4EcevxEUXvgm_dLNu97ZVKqK6ra-aE1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/elf/bundle-elf.css?v=JHcmlukWR_bF1f6wNjCxPO-MfAKMYz5QllMp4s2snCY1"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="/skins/elf/bundle-elf-mobile.css?v=QpTzRl4onqr8UsE1zcz3vLFgu_0x0hn2bC1hFoGFRcw1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/lihuiyy/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/lihuiyy/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/lihuiyy/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'lihuiyy', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=io4zEbuh-Z7jsAFtoQr7KZJFRT5xhG9p566mYeymZhs1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="http://www.cnblogs.com/lihuiyy/"><img id="blogLogo" src="/Skins/custom/images/logo.gif" alt="返回主页" /></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/lihuiyy/">lihui_yy</a></h1>
+<h2></h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/lihuiyy/">首页</a></li>
+<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/lihui_yy">联系</a></li>
+<li><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/lihuiyy/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/lihuiyy/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<span id="stats_post_count">随笔 - 84&nbsp; </span>
+<span id="stats_article_count">文章 - 13&nbsp; </span>
+<span id="stats-comment_count">评论 - 43</span>
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/lihuiyy/archive/2013/03/14/2958782.html">Struts2 的国际化实现</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><p>以前一直看见 i18N ，现在才知道原来 i18N 就是 Internationalization，因为以 i 开头，以 N 结尾，共18个字母，也就是国际化的意思。在百度搜索主页上没有看见中英文的切换，毕竟百度在中国是为了中国人而设计的，没必要弄个英文的切换。google搜索主页上是有的，因为谷歌在中国的服务器放到了香港，所以还有繁体切换。这是怎么做到的呢？其实原理很简单，用Struts2很容易实现的。以实现中英文切换为例做一下说明：</p>
+<p><strong><span style="color: #0000ff;">第一步：</span><span style="color: #0000ff;">在src目录下添加两个资源文件</span></strong>，命名方式很重要的。格式：baseName_language_country.properties。还有两种命名方式，都可以的，这个不用过多研究。比如，实现中英文切换我们要添加 resource_zh_CN.properties 和 resource_en_US.properties。然后将各个key-value对添加到这两个文件中，key字段一定要统一。如：</p>
+<p><img src="http://images.cnitblog.com/blog/319502/201303/14092035-be55f179fcdf4940bcd071ecc4693c9c.jpg" alt="" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="http://images.cnitblog.com/blog/319502/201303/14092043-83569f032ce243999a3ecf404614f4bc.jpg" alt="" /></p>
+<p>其中，value值可以使用占位符，比如：你好{0}，至于怎么传参数，稍后再解释。</p>
+<p><strong><span style="color: #0000ff;">第二步：</span><span style="color: #0000ff;">配置struts.properties文件</span></strong>，这个文件也是放在src目录下的。</p>
+<p><img src="http://images.cnitblog.com/blog/319502/201303/14092243-7eac6e4c7e5e405bab7df4eaf3f6ce1a.jpg" alt="" /></p>
+<p>第一个键值对是为了告诉程序，国际化资源文件是loginResource开头命名的资源文件。</p>
+<p>到这里其实配置就算完事儿了，接下来就是在各个地方使用。</p>
+<p>（1）在jsp中使用。举两个例子。</p>
+<p>　　&lt;s:text name="login.title"&gt;&lt;/s:text&gt;</p>
+<p>　　&lt;s:textfield name="username" key="login.username"&gt;&lt;/s:textfield&gt;</p>
+<p>　　还可以输出带占位符的信息。如，有一个 login.welcome = 你好{0}，那么可以用下面这种方式来显示：</p>
+<p>　　&lt;s:text name="login.welcome"&gt;&lt;s:param&gt;&lt;s:property value="username"/&gt;&lt;/s:param&gt;&lt;/s:text&gt;</p>
+<p>（2）在Action中使用。举个例子：</p>
+<p>　　getText("login.username");</p>
+<p>　　还可以使用带占位符的信息。如，有一个 login.welcome = 你好{0}，那么可以用下面这种方式来显示：</p>
+<p>　　String params[] = {"张三"};</p>
+<p>　　String welcome = getText("login.welcome", params);</p>
+<p><strong><span style="color: #0000ff;">第三步，</span><span style="color: #0000ff;">实现在jsp页面中的中英文切换</span></strong>。</p>
+<p>　　index.jsp中主要部分代码如下：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;">1</span>       <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">a </span><span style="color: #ff0000;">href</span><span style="color: #0000ff;">="lang.action?request_locale=zh_CN"</span><span style="color: #0000ff;">&gt;</span>中文<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">a</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">2</span>       <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">a </span><span style="color: #ff0000;">href</span><span style="color: #0000ff;">="lang.action?request_locale=en_US"</span><span style="color: #0000ff;">&gt;</span>English<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">a</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">3</span>       
+<span style="color: #008080;">4</span>       <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">s:form </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="loginform"</span><span style="color: #ff0000;"> action</span><span style="color: #0000ff;">="login"</span><span style="color: #ff0000;"> method</span><span style="color: #0000ff;">="post"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">5</span>           <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">s:textfield </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="username"</span><span style="color: #ff0000;"> key</span><span style="color: #0000ff;">="login.username"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">s:textfield</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">6</span>           <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">s:textfield </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="psd"</span><span style="color: #ff0000;"> key</span><span style="color: #0000ff;">="login.psd"</span> <span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">s:textfield</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">7</span>           <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">s:submit </span><span style="color: #ff0000;">key</span><span style="color: #0000ff;">="login.submit"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">s:submit</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">8</span>       <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">s:form</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>　　主要看前两行代码，lang.action其实就是一个实现页面转换的Action，没有什么实质性的内容，随便定义一个HelloAction.java，在execute()方法中返回个success就行了。url中的这个参数 request_locale会被 i18n 拦截器读取，然后根据这个值设置语言环境。 i18n 拦截器是struts中default里面自带的拦截器。</p>
+<p>　　struts.xml配置如下：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span>         <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">action </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="login"</span><span style="color: #ff0000;"> class</span><span style="color: #0000ff;">="com.main.action.LoginAction"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;"> 2</span>             <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">exception-mapping </span><span style="color: #ff0000;">result</span><span style="color: #0000ff;">="error"</span><span style="color: #ff0000;"> exception</span><span style="color: #0000ff;">="java.lang.RuntimeException"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">exception-mapping</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;"> 3</span>             <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">result </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="success"</span><span style="color: #0000ff;">&gt;</span>/success.jsp<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">result</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;"> 4</span>             <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">result </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="error"</span><span style="color: #0000ff;">&gt;</span>/index.jsp<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">result</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;"> 5</span>             <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">result </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="input"</span><span style="color: #0000ff;">&gt;</span>/index.jsp<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">result</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;"> 6</span>             <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">result </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="regist"</span><span style="color: #0000ff;">&gt;</span>/regist.jsp<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">result</span><span style="color: #0000ff;">&gt;</span>    
+<span style="color: #008080;"> 7</span>         <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">action</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;"> 8</span>         
+<span style="color: #008080;"> 9</span>         <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">action </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="lang"</span><span style="color: #ff0000;"> class</span><span style="color: #0000ff;">="com.main.action.HelloAction"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">10</span>             <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">result </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="success"</span><span style="color: #0000ff;">&gt;</span>/index.jsp<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">result</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">11</span>         <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">action</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>　　哦了，基本完成了，接下来就是看效果啦。运行一下：</p>
+<p>　　<img src="http://images.cnitblog.com/blog/319502/201303/14094524-d0caf3991eaa44ddbad375247e430fca.jpg" alt="" />&nbsp;&nbsp; <img src="http://images.cnitblog.com/blog/319502/201303/14094531-fd8934be352d4d3f9efa268a4178d293.jpg" alt="" /></p>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2013-03-14 09:47</span> <a href='http://www.cnblogs.com/lihuiyy/'>lihui_yy</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=2958782" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(2958782);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=98145,cb_entryId=2958782,cb_blogApp=currentBlogApp,cb_blogUserGuid='ab9ab6e2-82b9-e011-8673-842b2b196315',cb_entryCreatedDate='2013/3/14 9:47:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='ad_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='ad_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2016 lihui_yy
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

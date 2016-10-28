@@ -52,6 +52,9 @@ public class RestController {
 	public  String hello(){
 		//不配置@responseBody，则该hello，自动去查找hello.jsp页面。http://localhost:8080/springmvc/rest/hello
 		//httpMethod="GET"：当@RequestMapping无限请求类型时，所有请求类型，都会显示出来。设置httpMethod，在swagger中，只显示里面的请求类型。
+		
+		System.out.println();
+		
 		return "hello";
 	}
 	/**
