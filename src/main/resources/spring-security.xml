@@ -38,21 +38,21 @@
 	<!-- 	security:intercept-url 是有顺序的，顺序是自上而下，只要找到一个就会拦截，底下的就不起作用。 -->
 
 		<security:intercept-url pattern="/main/admin"
-			access="ROLE_ADMIN" requires-channel="https" />
+			access="ROLE_ADMIN"  />
 <!-- 		<security:intercept-url pattern="/main/common" access="hasRole('permitAll')" 
 			/> <security:intercept-url pattern="/auth/login" access="hasRole('permitAll')" 
 			/> -->
 		<security:intercept-url pattern="/rest/say"
 			access="ROLE_USER" />
 		<!-- 如果还有地层路径，也需要写出来。 -->
-		<security:intercept-url pattern="/rest/user/*"
-			access="ROLE_USER" />
+<!-- 		<security:intercept-url pattern="/rest/user/*"
+			access="ROLE_USER" /> -->
 	</security:http>
 	<security:authentication-manager>
 		<security:authentication-provider>
 		<!-- 	1.基础用户 -->
-			<security:jdbc-user-service data-source-ref="dataSource" users-by-username-query="select 
-				* ,true from user_t where username = ?"/>
+<!-- 			<security:jdbc-user-service data-source-ref="dataSource" users-by-username-query="select 
+				* ,true from user_t where username = ?"/> -->
 			<security:user-service>
 
 				<security:user name="xiao" password="abc" authorities="ROLE_USER" />
