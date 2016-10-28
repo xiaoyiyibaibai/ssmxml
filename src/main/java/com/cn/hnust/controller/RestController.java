@@ -49,9 +49,9 @@ public class RestController {
 	@RequestMapping(value="/hello")
 	@ApiOperation(httpMethod="GET" ,notes="你好！",value="欢迎页面")
 	@ApiIgnore
-	public @ResponseBody String hello(){
+	public  String hello(){
 		//httpMethod="GET"：当@RequestMapping无限请求类型时，所有请求类型，都会显示出来。设置httpMethod，在swagger中，只显示里面的请求类型。
-		return "你好！hello";
+		return "hello";
 	}
 	/**
 	 * http://localhost:8080/springmvc/rest/say/12222
